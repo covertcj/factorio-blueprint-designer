@@ -1,4 +1,5 @@
-require 'control.designer-list-gui'
+require 'control.gui.designer-list'
+require 'control.designer-management'
 
 script.on_init(function()
     global.designers = {}
@@ -41,13 +42,3 @@ script.on_event(defines.events.on_gui_click, function(ev)
         list.destroy()
     end
 end)
-
-function create_designer(player, name)
-    player.print('Creating designer "' .. name .. '"', {r = 0, g = 1, b = 0, a = 1})
-    local new_designer = {
-        name = name,
-        surface = 'bpd_' .. name
-    }
-    
-    global.designers[name] = new_designer
-end

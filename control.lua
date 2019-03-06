@@ -32,9 +32,9 @@ end)
 script.on_event(defines.events.on_gui_click, function(ev)
     local player = game.players[ev.player_index]
     
-    if ev.element.name == 'blueprint-designer-list-close' then
+    if ev.element.name == 'bpd-list-close' then
         hide_designer_list(player)
-    elseif ev.element.name == 'blueprint-designer-create-designer' then
+    elseif ev.element.name == 'bpd-create-designer' then
         local name = designer_list_get_name_text(player)
         
         if name == '' or name == nil then
@@ -48,11 +48,11 @@ script.on_event(defines.events.on_gui_click, function(ev)
         end
         
         create_designer(player, name)
-    elseif starts_with(ev.element.name, 'blueprint-designer-list-enter-') then
+    elseif starts_with(ev.element.name, 'bpd-list-enter-') then
         local name = remove_prefix(ev.element.name, 'blueprint-designer-list-enter-')
         enter_designer(player, name)
-    elseif starts_with(ev.element.name, 'blueprint-designer-list-delete-') then
-        local name = remove_prefix(ev.element.name, 'blueprint-designer-list-delete-')
+    elseif starts_with(ev.element.name, 'bpd-list-delete-') then
+        local name = remove_prefix(ev.element.name, 'bpd-list-delete-')
         delete_designer(player, name)
     elseif ev.element.name == 'bpd-main-button' then
         toggle_designer_list(player)

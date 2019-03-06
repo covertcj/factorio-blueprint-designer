@@ -11,18 +11,20 @@ end)
 script.on_event(defines.events.on_player_created, function(ev)
 end)
 
-script.on_event('open-designers-list', function(ev)
-    show_designer_list(game.players[ev.player_index])
+script.on_event('bpd-toggle-designers-list', function(ev)
+    toggle_designer_list(game.players[ev.player_index])
 end)
 
-script.on_event('open-designers-list-2', function(ev)
-    game.players[ev.player_index].print('Oh yeah baby, that control')
+script.on_event('bpd-enter-designer', function(ev)
+    game.players[ev.player_index].print('Enter Designer')
 end)
 
 script.on_event(defines.events.on_gui_click, function(ev)
     local player = game.players[ev.player_index]
     
-    if ev.element.name == 'blueprint-designer-create-designer' then
+    if ev.element.name == 'blueprint-designer-list-close' then
+        hide_designer_list(player)
+    elseif ev.element.name == 'blueprint-designer-create-designer' then
         local name = designer_list_get_name_text(player)
 
         if name == '' or name == nil then
@@ -36,12 +38,11 @@ script.on_event(defines.events.on_gui_click, function(ev)
         end
         
         create_designer(player, name)
-        hide_designer_list(player)
     elseif starts_with(ev.element.name, 'blueprint-designer-list-enter-') then
         local name = remove_prefix(ev.element.name, 'blueprint-designer-list-enter-')
-        player.print('Enter: ' .. name)
+        enter_designer(player, name)
     elseif starts_with(ev.element.name, 'blueprint-designer-list-delete-') then
         local name = remove_prefix(ev.element.name, 'blueprint-designer-list-delete-')
-        player.print('Delete: ' .. name)
+        delete_desiger(name)
     end
 end)

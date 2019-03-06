@@ -1,14 +1,14 @@
 data:extend({
     {
         type = 'custom-input',
-        name = 'open-designers-list',
-        key_sequence = 'SHIFT + B',
+        name = 'bpd-toggle-designers-list',
+        key_sequence = 'CONTROL + B',
         consuming = 'all'
     },
     {
         type = 'custom-input',
-        name = 'open-designers-list-2',
-        key_sequence = 'CONTROL + B',
+        name = 'bpd-enter-designer',
+        key_sequence = 'SHIFT + B',
         consuming = 'all'
     }
 })

@@ -35,3 +35,11 @@ function hide_designer_list(player)
     global.designer_lists[player.index] = nil
     list.destroy()
 end
+
+function designer_list_get_name_text(player)
+    local list = global.designer_lists[player.index]
+    if not list then return nil end
+    
+    local name_field = list.mainflow.creationflow.designername
+    return name_field.text
+end

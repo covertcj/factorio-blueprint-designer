@@ -85,6 +85,10 @@ function enter_designer(player, name)
         player.character = nil
     end
     
+    if settings.startup['bpd-designer-always-day'].value then
+        game.surfaces['bpd_' .. name].freeze_daytime = true
+    end
+
     player.teleport({0, 0}, 'bpd_' .. name)
     player.cheat_mode = true
 end

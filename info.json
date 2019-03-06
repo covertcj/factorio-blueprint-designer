@@ -1,0 +1,10 @@
+{
+  "name": "blueprint-designer",
+  "version": "0.1.0",
+  "factorio_version": "0.17",
+  "title": "Blueprint Designer",
+  "author": "Christopher J. Covert",
+  "description": "Allows you to enter side areas with infinite resources to design blueprints",
+  "homepage": "https://github.com/covertcj/factorio-blueprint-designer",
+  "dependencies": ["base >= 0.17"]
+}

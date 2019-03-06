@@ -28,9 +28,9 @@ function show_designer_list(player)
     generate_designer_table(designers_flow)
     
     local creation_flow = main_flow.add({type = 'flow', name = 'creationflow', direction = 'horizontal'})
-    creation_flow.add({type = 'textfield', name = 'designername', tooltip = {'bd.create-designer-field'}})
-    creation_flow.add({type = 'button', name = 'blueprint-designer-create-designer', caption = {'bd.create-designer-button'}})
-    creation_flow.add({type = 'button', name = 'blueprint-designer-list-close', caption = {'bd.close-designer-list-button'}})
+    creation_flow.add({type = 'textfield', name = 'designername', tooltip = {'bpd.create-designer-field'}})
+    creation_flow.add({type = 'button', name = 'blueprint-designer-create-designer', caption = {'bpd.create-designer-button'}})
+    creation_flow.add({type = 'button', name = 'blueprint-designer-list-close', caption = {'bpd.close-designer-list-button'}})
     
     player.opened = designer_list_frame
 end
@@ -39,7 +39,7 @@ function generate_designer_table(parent)
     parent.clear()
 
     if next(global.designers) == nil then
-        parent.add({type = 'label', name = 'nodesigners', caption = {'bd.no-designers-yet'}})
+        parent.add({type = 'label', name = 'nodesigners', caption = {'bpd.no-designers-yet'}})
     else
         local designer_table = parent.add({type = 'table', name = 'designertable', column_count=3})
         for _, designer in pairs(global.designers) do

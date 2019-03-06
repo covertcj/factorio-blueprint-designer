@@ -1,11 +1,18 @@
 require 'util.strings'
 
+require 'control.gui.main-button'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 
 script.on_init(function()
     init_designers()
     init_designer_list()
+end)
+
+script.on_event(defines.events.on_player_created, function(ev)
+    local player = game.players[ev.player_index]
+
+    create_main_button(player)
 end)
 
 script.on_event('bpd-toggle-designers-list', function(ev)
@@ -47,6 +54,8 @@ script.on_event(defines.events.on_gui_click, function(ev)
     elseif starts_with(ev.element.name, 'blueprint-designer-list-delete-') then
         local name = remove_prefix(ev.element.name, 'blueprint-designer-list-delete-')
         delete_designer(player, name)
+    elseif ev.element.name == 'bpd-main-button' then
+        toggle_designer_list(player)
     end
 end)
 

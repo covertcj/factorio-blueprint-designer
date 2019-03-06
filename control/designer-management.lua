@@ -37,6 +37,19 @@ function create_designer(player, name)
         end
     end
     surface.set_tiles(tiles)
+
+    local e = surface.create_entity {name = "electric-energy-interface", position = {0, 0}, force = player.force}
+    e.minable = false
+
+    e = surface.create_entity {name = "big-electric-pole", position = {5, 0}, force = player.force}
+    e.minable = false
+    e = surface.create_entity {name = "medium-electric-pole", position = {2, 0}, force = player.force}
+    e.minable = false
+
+    e = surface.create_entity {name = "infinity-chest", position = {-3, -1}, force = player.force}
+    e.minable = false
+    e = surface.create_entity {name = "express-loader", position = {-3, 1}, force = player.force, direction = defines.direction.south}
+    e.minable = false
     
     global.designers[name] = new_designer
     refresh_designer_list(player)

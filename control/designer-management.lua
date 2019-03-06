@@ -58,9 +58,9 @@ end
 function delete_designer(player, name)
     local surface_name = 'bpd_' .. name
     
-    for _, player in ipairs(game.players) do
-        if player.surface.name == surface_name then
-            exit_designer(player)
+    for _, p in pairs(game.players) do
+        if p.surface.name == surface_name then
+            exit_designer(p)
         end
     end
     

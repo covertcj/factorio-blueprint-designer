@@ -2,13 +2,12 @@ require 'control.gui.designer-list'
 require 'control.designer-management'
 
 script.on_init(function()
-    global.designers = {}
-    global.designer_lists = {}
-    global.last_designer = {}
+    init_designers()
+    init_designer_list()
 end)
 
 script.on_event(defines.events.on_player_created, function(ev)
-    end)
+end)
 
 script.on_event('open-designers-list', function(ev)
     show_designer_list(game.players[ev.player_index])
@@ -39,6 +38,6 @@ script.on_event(defines.events.on_gui_click, function(ev)
         end
         
         create_designer(player, name)
-        list.destroy()
+        hide_designer_list(player)
     end
 end)

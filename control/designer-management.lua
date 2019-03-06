@@ -1,3 +1,8 @@
+function init_designers()
+    global.designers = {}
+    global.last_designer = {}
+end
+
 function create_designer(player, name)
     player.print('Creating designer "' .. name .. '"', {r = 0, g = 1, b = 0, a = 1})
     local new_designer = {

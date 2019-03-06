@@ -1,3 +1,7 @@
+function init_designer_list()
+    global.designer_lists = {}
+end
+
 function show_designer_list(player)
     local designer_list_frame = player.gui.center.add({type = 'frame', name = 'blueprint-designer-list-gui', direction = 'vertical'})
     global.designer_lists[player.index] = designer_list_frame
@@ -22,4 +26,12 @@ function show_designer_list(player)
     creation_flow.add({type = 'button', name = 'blueprint-designer-create-designer', caption = {'bd.create-designer-button'}})
     
     player.opened = designer_list_frame
+end
+
+function hide_designer_list(player)
+    local list = global.designer_lists[player.index]
+    if not list then return end
+
+    global.designer_lists[player.index] = nil
+    list.destroy()
 end

@@ -1,6 +1,6 @@
 require 'util.strings'
 
-require 'control.gui.main-button'
+require 'control.gui.sidebar'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 

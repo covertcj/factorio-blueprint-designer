@@ -71,12 +71,13 @@ function delete_designer(player, name)
     refresh_designer_list(player)
 end
 
+function nilstr(v) if v then return v else return 'nil' end end
 function enter_designer(player, name)
     if name == nil then
         name = global.last_designer[player.index]
     end
     
-    if name ~= nil and game.surfaces[name] == nil then
+    if name ~= nil and game.surfaces['bpd_' .. name] == nil then
         name = nil
     end
     

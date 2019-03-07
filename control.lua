@@ -50,7 +50,7 @@ script.on_event(defines.events.on_gui_click, function(ev)
         
         create_designer(player, name)
     elseif starts_with(ev.element.name, 'bpd-list-enter-') then
-        local name = remove_prefix(ev.element.name, 'blueprint-designer-list-enter-')
+        local name = remove_prefix(ev.element.name, 'bpd-list-enter-')
         hide_designer_list(player)
         enter_designer(player, name)
     elseif starts_with(ev.element.name, 'bpd-list-delete-') then

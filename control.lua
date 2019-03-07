@@ -9,8 +9,9 @@ script.on_event(defines.events.on_player_created, function(ev)
 
     init_designers()
     init_designer_list()
+    init_sidebar()
     
-    create_main_button(player)
+    create_sidebar(player)
 end)
 
 script.on_event('bpd-toggle-designers-list', function(ev)
@@ -56,6 +57,8 @@ script.on_event(defines.events.on_gui_click, function(ev)
         delete_designer(player, name)
     elseif ev.element.name == 'bpd-main-button' then
         toggle_designer_list(player)
+    elseif ev.element.name == 'bpd-clear-button' then
+        clear_designer(player)
     end
 end)
 

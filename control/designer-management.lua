@@ -71,6 +71,10 @@ function delete_designer(player, name)
     refresh_designer_list(player)
 end
 
+function clear_designer(player)
+    player.print('Clearing designer')
+end
+
 function nilstr(v) if v then return v else return 'nil' end end
 function enter_designer(player, name)
     if name == nil then
@@ -110,6 +114,8 @@ function enter_designer(player, name)
     
     player.teleport({0, 0}, 'bpd_' .. name)
     player.cheat_mode = true
+
+    show_clear_button(player)
 end
 
 function exit_designer(player)
@@ -120,8 +126,14 @@ function exit_designer(player)
     local character = global.player_characters[player.index]
     player.teleport({0, 0}, character.surface)
     player.character = character
+
+    hide_clear_button(player)
 end
 
 function is_in_designer(player)
     return starts_with(player.surface.name, 'bpd_')
+end
+
+function current_designer(player)
+    return remove_prefix(player.surface.name, 'bpd_')
 end

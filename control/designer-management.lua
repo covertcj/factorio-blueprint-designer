@@ -1,9 +1,9 @@
 require 'gui.designer-list'
 
 function init_designers()
-    global.designers = {}
-    global.last_designer = {}
-    global.player_characters = {}
+    global.designers = global.designers or {}
+    global.last_designer = global.last_designer or {}
+    global.player_characters = global.player_characters or {}
 end
 
 function create_designer(player, name)

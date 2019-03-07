@@ -4,13 +4,11 @@ require 'control.gui.main-button'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 
-script.on_init(function()
-    init_designers()
-    init_designer_list()
-end)
-
 script.on_event(defines.events.on_player_created, function(ev)
     local player = game.players[ev.player_index]
+
+    init_designers()
+    init_designer_list()
     
     create_main_button(player)
 end)

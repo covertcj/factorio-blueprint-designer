@@ -93,7 +93,7 @@ function enter_designer(player, name)
     global.last_designer[player.index] = name
     
     if settings.get_player_settings(player)['bpd-designer-announce'].value then
-        player.print('Enterig Designer: ' .. name)
+        player.print('Entering Designer: ' .. name)
     end
     
     if not is_in_designer(player) then

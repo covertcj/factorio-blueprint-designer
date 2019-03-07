@@ -11,7 +11,7 @@ end)
 
 script.on_event(defines.events.on_player_created, function(ev)
     local player = game.players[ev.player_index]
-
+    
     create_main_button(player)
 end)
 
@@ -67,7 +67,15 @@ script.on_event(defines.events.on_built_entity, function(ev)
     
     local type = ev.created_entity.type
     if type == 'entity-ghost' or type == 'tile-ghost' then
-        ev.created_entity.revive()
+        local _, revived_entity, request = ev.created_entity.revive({return_item_request_proxy = true})
+
+        if revived_entity and request then
+            for name, count in pairs(request.item_requests) do
+                revived_entity.insert { name = name, count = count }
+            end
+
+            request.destroy()
+        end
     end
     
     if type == 'lab' then

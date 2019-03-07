@@ -67,7 +67,6 @@ script.on_event(defines.events.on_built_entity, function(ev)
     
     local type = ev.created_entity.type
     if type == 'entity-ghost' or type == 'tile-ghost' then
-        player.print('Reviving...')
         ev.created_entity.revive()
     end
     

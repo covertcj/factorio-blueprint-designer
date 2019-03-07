@@ -37,18 +37,18 @@ function create_designer(player, name)
         end
     end
     surface.set_tiles(tiles)
-
-    local e = surface.create_entity {name = "electric-energy-interface", position = {0, 0}, force = player.force}
+    
+    local e = surface.create_entity{name = "electric-energy-interface", position = {0, 0}, force = player.force}
     e.minable = false
-
-    e = surface.create_entity {name = "big-electric-pole", position = {5, 0}, force = player.force}
+    
+    e = surface.create_entity{name = "big-electric-pole", position = {5, 0}, force = player.force}
     e.minable = false
-    e = surface.create_entity {name = "medium-electric-pole", position = {2, 0}, force = player.force}
+    e = surface.create_entity{name = "medium-electric-pole", position = {2, 0}, force = player.force}
     e.minable = false
-
-    e = surface.create_entity {name = "infinity-chest", position = {-3, -1}, force = player.force}
+    
+    e = surface.create_entity{name = "infinity-chest", position = {-3, -1}, force = player.force}
     e.minable = false
-    e = surface.create_entity {name = "express-loader", position = {-3, 1}, force = player.force, direction = defines.direction.south}
+    e = surface.create_entity{name = "express-loader", position = {-3, 1}, force = player.force, direction = defines.direction.south}
     e.minable = false
     
     global.designers[name] = new_designer
@@ -75,31 +75,38 @@ function enter_designer(player, name)
     if name == nil then
         name = global.last_designer[player.index]
     end
-
+    
     if name ~= nil and game.surfaces[name] == nil then
         name = nil
     end
-
+    
     if name == nil then
         name = next(global.designers)
     end
-
+    
     if name == nil then
         name = 'default'
         create_designer(player, name)
     end
-
+    
     global.last_designer[player.index] = name
-
-    player.print('Enterig Designer: ' .. name)
+    
+    if settings.get_player_settings(player)['bpd-designer-announce'].value then
+        player.print('Enterig Designer: ' .. name)
+    end
     
     if not is_in_designer(player) then
         global.player_characters[player.index] = player.character
         player.character = nil
     end
     
-    game.surfaces['bpd_' .. name].freeze_daytime = settings.global['bpd-designer-always-day'].value
-
+    local surface = game.surfaces['bpd_' .. name]
+    local always_day = settings.global['bpd-designer-always-day'].value
+    surface.freeze_daytime = always_day
+    if always_day then
+        surface.daytime = 0
+    end
+    
     player.teleport({0, 0}, 'bpd_' .. name)
     player.cheat_mode = true
 end

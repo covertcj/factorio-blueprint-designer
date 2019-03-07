@@ -12,5 +12,11 @@ data:extend({
         name = 'bpd-designer-always-day',
         setting_type = 'runtime-global',
         default_value = true
+    },
+    {
+        type = 'bool-setting',
+        name = 'bpd-designer-announce',
+        setting_type = 'runtime-per-user',
+        default_value = true
     }
 })

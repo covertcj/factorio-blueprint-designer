@@ -75,20 +75,18 @@ end
 
 function add_basic_designer_entities(player, designer_surface)
     local e = designer_surface.create_entity{name = "electric-energy-interface", position = {0, 0}, force = player.force}
-    e.minable = false
-    
+
     e = designer_surface.create_entity{name = "big-electric-pole", position = {5, 0}, force = player.force}
-    e.minable = false
     e = designer_surface.create_entity{name = "medium-electric-pole", position = {2, 0}, force = player.force}
-    e.minable = false
-    
+
+    e = designer_surface.create_entity{name = "infinity-pipe", position = {-4, -1}, force = player.force}
+    e = designer_surface.create_entity{name = "infinity-pipe", position = {-4, 0}, force = player.force}
+    e = designer_surface.create_entity{name = "infinity-pipe", position = {-4, 1}, force = player.force}
+
     e = designer_surface.create_entity{name = "infinity-chest", position = {-3, -1}, force = player.force}
-    e.minable = false
     e = designer_surface.create_entity{name = "express-loader", position = {-3, 1}, force = player.force, direction = defines.direction.south}
-    e.minable = false
 end
 
-function nilstr(v) if v then return v else return 'nil' end end
 function enter_designer(player, name)
     if name == nil then
         name = global.last_designer[player.index]
@@ -144,6 +142,7 @@ function exit_designer(player)
 end
 
 function is_in_designer(player)
+    if not player then return false end
     return starts_with(player.surface.name, 'bpd_')
 end
 

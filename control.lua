@@ -4,13 +4,21 @@ require 'control.gui.sidebar'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 
-script.on_event(defines.events.on_player_created, function(ev)
-    local player = game.players[ev.player_index]
-
+script.on_configuration_changed(function ()
     init_designers()
     init_designer_list()
     init_sidebar()
-    
+end)
+
+script.on_init(function()
+    init_designers()
+    init_designer_list()
+    init_sidebar()
+end)
+
+script.on_event(defines.events.on_player_created, function(ev)
+    local player = game.players[ev.player_index]
+
     create_sidebar(player)
 end)
 

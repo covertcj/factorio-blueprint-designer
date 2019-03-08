@@ -1,6 +1,7 @@
-function init_designer_list()
-    global.designer_lists = global.designer_lists or {}
-end
+global.designer_lists = global.designer_lists or {}
+-- function init_designer_list()
+--     global.designer_lists = global.designer_lists or {}
+-- end
 
 function toggle_designer_list(player)
     if global.designer_lists[player.index] then

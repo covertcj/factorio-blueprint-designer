@@ -42,17 +42,17 @@ if ($BumpMajor -or $BumpMinor -or $BumpPatch) {
 }
 
 $mod_name = Get-Content .\info.json | ForEach-Object {if ($_ -match '"name"\s*:\s*"([^"]+)"') { $Matches[1] }}
-$old_mods = (Get-ChildItem ..\ | ForEach-Object {if ($_ -match $mod_name) { $_.FullName }})
+$old_mods = (Get-ChildItem ..\..\mods | ForEach-Object {if ($_ -match $mod_name) { $_.FullName }})
 
 foreach ($old_mod in $old_mods) {
     Write-Host "Removing: $old_mod"
     if (-not $DryRun) {
-        # Remove-Item -Recurse -Force $old_mod
+        Remove-Item -Recurse -Force $old_mod
     }
 }
 
-Write-Host "Linking mod..."
+$new_link = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) "../../mods/$($mod_name)_$($version_info.Major).$($version_info.Minor).$($version_info.Patch)"))
+Write-Host "Linking mod: $new_link"
 if (-not $DryRun) {
     New-Item -ItemType Junction -Target ./ -Name "../../mods/$($mod_name)_$($version_info.Major).$($version_info.Minor).$($version_info.Patch)"
 }
-

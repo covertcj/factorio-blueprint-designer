@@ -8,18 +8,20 @@ script.on_configuration_changed(function ()
     init_designers()
     init_designer_list()
     init_sidebar()
+
+    for _, player in pairs(game.players) do
+        create_sidebar(player)
+    end
 end)
 
 script.on_init(function()
     init_designers()
     init_designer_list()
     init_sidebar()
-end)
 
-script.on_event(defines.events.on_player_created, function(ev)
-    local player = game.players[ev.player_index]
-
-    create_sidebar(player)
+    for _, player in pairs(game.players) do
+        create_sidebar(player)
+    end
 end)
 
 script.on_event('bpd-toggle-designers-list', function(ev)

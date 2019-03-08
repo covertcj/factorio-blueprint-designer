@@ -6,17 +6,14 @@ function init_sidebar()
 end
 
 function create_sidebar(player)
+    if global.sidebars[player.index] then return end
+
     local parent = mod_gui.get_frame_flow(player)
     local sidebar = parent.add({ type = 'flow', name ='bpd-sidebar', direction='horizontal'})
 
     global.sidebars[player.index] = sidebar
 
     sidebar.add({ type = 'sprite-button', name = 'bpd-main-button', sprite='bpd-main-button', tooltip={'bpd.main-button'}})
-end
-
-function show_clear_lab_button(player)
-    local sidebar = global.sidebars[player.index]
-    global.clear_buttons[player.index] = sidebar.add({ type = 'button', name = 'bpd-main-button', caption={'bpd.clear-button'}, tooltip={'bpd.clear-button-tooltip'}})
 end
 
 function show_clear_button(player)

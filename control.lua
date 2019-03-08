@@ -85,8 +85,6 @@ script.on_event(defines.events.on_built_entity, function(ev)
 end)
 
 script.on_event(defines.events.on_marked_for_deconstruction, function(ev)
-    local player = game.players[ev.player_index]
-    if not is_in_designer(player) then return end
-    
+    if not is_in_designer(ev.entity) then return end
     ev.entity.destroy()
 end)

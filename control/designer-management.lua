@@ -141,9 +141,14 @@ function exit_designer(player)
     hide_clear_button(player)
 end
 
-function is_in_designer(player)
-    if not player then return false end
-    return starts_with(player.surface.name, 'bpd_')
+function is_in_designer(entity)
+    if not entity or
+       not entity.surface or
+       not entity.surface.name then
+        return false
+    end
+
+    return starts_with(entity.surface.name, 'bpd_')
 end
 
 function current_designer(player)

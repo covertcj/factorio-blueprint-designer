@@ -4,7 +4,7 @@ require 'control.gui.sidebar'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 
-script.on_event(defines.events.on_player_created, function (ev)
+script.on_event(defines.events.on_player_created, function(ev)
     if ev.player_index then
         create_sidebar(game.players[ev.player_index])
     end
@@ -65,12 +65,12 @@ script.on_event(defines.events.on_built_entity, function(ev)
     local type = ev.created_entity.type
     if type == 'entity-ghost' or type == 'tile-ghost' then
         local _, revived_entity, request = ev.created_entity.revive({return_item_request_proxy = true})
-
+        
         if revived_entity and request then
             for name, count in pairs(request.item_requests) do
-                revived_entity.insert { name = name, count = count }
+                revived_entity.insert{name = name, count = count}
             end
-
+            
             request.destroy()
         end
     end
@@ -79,4 +79,26 @@ end)
 script.on_event(defines.events.on_marked_for_deconstruction, function(ev)
     if not is_in_designer(ev.entity) then return end
     ev.entity.destroy()
+end)
+
+script.on_event(defines.events.on_marked_for_upgrade, function(ev)
+    if not is_in_designer(ev.entity) then return end
+    
+    local e = ev.entity
+    local surface = ev.entity.surface
+    
+    local settings = {
+        fast_replace = true,
+        name = ev.target.name,
+        position = e.position,
+        direction = e.direction,
+        force = e.force,
+        player = game.players[ev.player_index]
+    }
+
+    if e.type == 'underground-belt' then
+        settings.type = e.belt_to_ground_type
+    end
+    
+    surface.create_entity(settings)
 end)

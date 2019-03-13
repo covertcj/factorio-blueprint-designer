@@ -74,10 +74,6 @@ script.on_event(defines.events.on_built_entity, function(ev)
             request.destroy()
         end
     end
-    
-    if type == 'lab' then
-        ev.created_entity.active = false
-    end
 end)
 
 script.on_event(defines.events.on_marked_for_deconstruction, function(ev)

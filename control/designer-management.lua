@@ -1,14 +1,9 @@
 require 'gui.designer-list'
+require 'forces'
 
 global.designers = global.designers or {}
 global.last_designer = global.last_designer or {}
 global.player_characters = global.player_characters or {}
-
--- function init_designers()
---     global.designers = global.designers or {}
---     global.last_designer = global.last_designer or {}
---     global.player_characters = global.player_characters or {}
--- end
 
 function create_designer(player, name)
     player.print('Creating Designer: ' .. name, {r = 0, g = 1, b = 0, a = 1})
@@ -78,17 +73,19 @@ function clear_designer(player)
 end
 
 function add_basic_designer_entities(player, designer_surface)
-    local e = designer_surface.create_entity{name = "electric-energy-interface", position = {0, 0}, force = player.force}
+    local force = get_designer_force(player)
 
-    e = designer_surface.create_entity{name = "big-electric-pole", position = {5, 0}, force = player.force}
-    e = designer_surface.create_entity{name = "medium-electric-pole", position = {2, 0}, force = player.force}
+    designer_surface.create_entity{name = "electric-energy-interface", position = {0, 0}, force = force}
 
-    e = designer_surface.create_entity{name = "infinity-pipe", position = {-4, -1}, force = player.force}
-    e = designer_surface.create_entity{name = "infinity-pipe", position = {-4, 0}, force = player.force}
-    e = designer_surface.create_entity{name = "infinity-pipe", position = {-4, 1}, force = player.force}
+    designer_surface.create_entity{name = "big-electric-pole", position = {5, 0}, force = force}
+    designer_surface.create_entity{name = "medium-electric-pole", position = {2, 0}, force = force}
 
-    e = designer_surface.create_entity{name = "infinity-chest", position = {-3, -1}, force = player.force}
-    e = designer_surface.create_entity{name = "express-loader", position = {-3, 1}, force = player.force, direction = defines.direction.south}
+    designer_surface.create_entity{name = "infinity-pipe", position = {-4, -1}, force = force}
+    designer_surface.create_entity{name = "infinity-pipe", position = {-4, 0}, force = force}
+    designer_surface.create_entity{name = "infinity-pipe", position = {-4, 1}, force = force}
+
+    designer_surface.create_entity{name = "infinity-chest", position = {-3, -1}, force = force}
+    designer_surface.create_entity{name = "express-loader", position = {-3, 1}, force = force, direction = defines.direction.south}
 end
 
 function enter_designer(player, name)
@@ -131,6 +128,7 @@ function enter_designer(player, name)
     player.cheat_mode = true
 
     show_clear_button(player)
+    apply_designer_force(player)
 end
 
 function exit_designer(player)
@@ -143,6 +141,7 @@ function exit_designer(player)
     player.character = character
 
     hide_clear_button(player)
+    restore_player_force(player)
 end
 
 function is_in_designer(entity)

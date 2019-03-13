@@ -4,26 +4,6 @@ require 'control.gui.sidebar'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 
--- script.on_configuration_changed(function ()
---     init_designers()
---     init_designer_list()
---     init_sidebar()
-
---     for _, player in pairs(game.players) do
---         create_sidebar(player)
---     end
--- end)
-
--- script.on_init(function()
---     init_designers()
---     init_designer_list()
---     init_sidebar()
-
---     for _, player in pairs(game.players) do
---         create_sidebar(player)
---     end
--- end)
-
 script.on_event(defines.events.on_player_created, function (ev)
     if ev.player_index then
         create_sidebar(game.players[ev.player_index])

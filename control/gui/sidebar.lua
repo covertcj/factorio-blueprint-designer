@@ -3,11 +3,6 @@ require 'mod-gui'
 global.sidebars = global.sidebars or {}
 global.clear_buttons = global.clear_buttons or {}
 
--- function init_sidebar()
---     global.sidebars = global.sidebars or {}
---     global.clear_buttons = global.clear_buttons or {}
--- end
-
 function create_sidebar(player)
     if global.sidebars[player.index] then return end
 

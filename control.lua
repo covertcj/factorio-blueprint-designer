@@ -4,10 +4,20 @@ require 'control.gui.sidebar'
 require 'control.gui.designer-list'
 require 'control.designer-management'
 
-script.on_event(defines.events.on_player_created, function(ev)
-    if ev.player_index then
-        create_sidebar(game.players[ev.player_index])
+local function init_ui(player)
+    if not player then return end
+
+    create_sidebar(player)
+end
+
+script.on_configuration_changed(function()
+    for _, player in pairs(game.players) do
+        init_ui(player)
     end
+end)
+
+script.on_event(defines.events.on_player_created, function(ev)
+    init_ui(game.players[ev.player_index])
 end)
 
 script.on_event('bpd-toggle-designers-list', function(ev)

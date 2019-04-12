@@ -60,5 +60,5 @@ foreach ($old_mod in $old_mods) {
 $new_link = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) "../../mods/$($mod_name)_$($version_info.Major).$($version_info.Minor).$($version_info.Patch)"))
 Write-Host "Linking mod: $new_link"
 if (-not $DryRun) {
-    New-Item -ItemType Junction -Target ./ -Name "../../mods/$($mod_name)_$($version_info.Major).$($version_info.Minor).$($version_info.Patch)"
+    New-Item -ItemType SymbolicLink -Target "$(Get-Location)" -Name "../../mods/$($mod_name)_$($version_info.Major).$($version_info.Minor).$($version_info.Patch)"
 }
